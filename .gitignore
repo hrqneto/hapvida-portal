@@ -1,0 +1,15 @@
+.output.css
+node_modules/
+
+.vite/
+.vite-cache/
+.vscode/
+.vscode/
+.DS_Store
+
+.tailwindcss/
+.postcssrc/
+
+eslintcache
+.sass-cache/
+
