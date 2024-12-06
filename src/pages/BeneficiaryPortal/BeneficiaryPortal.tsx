@@ -8,7 +8,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const BeneficiaryPortal: React.FC = () => {
   const navigate = useNavigate();
-  const { menuOpen, toggleMenu, currentIndex, handlePrev, handleNext } = useAppContext();
+  const {
+    menuOpen,
+    toggleMenu,
+    currentIndex,
+    banners,
+    handlePrev,
+    handleNext,
+  } = useAppContext();
   const { filteredServices, handleSearch } = useServices();
   const { profileInfo } = useProfileData();
 
@@ -16,14 +23,10 @@ const BeneficiaryPortal: React.FC = () => {
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
-  const banners = [
-    { id: 1, title: "Renovação de receita: o remédio para quem quer economizar tempo.", image: "/src/assets/banner1.png" },
-    { id: 2, title: "Consulta médica mais fácil, rápida e segura.", image: "/src/assets/banner2.jpg" },
-  ];
-
   return (
     <div className="flex min-h-screen bg-gray-100">
       <div className="flex-1 flex flex-col">
+        {/* Header */}
         <header className="bg-blue-700 flex items-center justify-between p-4 shadow">
           <button onClick={toggleMenu} className="text-gray-700 hover:text-blue-700">
             {menuOpen ? "" : "Abrir Menu"}
@@ -59,8 +62,10 @@ const BeneficiaryPortal: React.FC = () => {
           </div>
         </header>
 
+        {/* conteudo */}
         <main className="flex-1 grid grid-cols-3 gap-4 p-6">
           <div className="col-span-2 space-y-6">
+            {/* servicos */}
             <div className="grid grid-cols-7 gap-2">
               {filteredServices.map((action, index) => (
                 <button
@@ -77,6 +82,8 @@ const BeneficiaryPortal: React.FC = () => {
                 </button>
               ))}
             </div>
+
+            {/* banners */}
             <div className="relative w-full">
               <div className="relative h-64 md:h-96 overflow-hidden rounded-lg">
                 {banners.map((banner, index) => (
@@ -109,18 +116,20 @@ const BeneficiaryPortal: React.FC = () => {
                 </button>
               </div>
             </div>
+
+            {/* prx agendamentos */}
             <div className="bg-white rounded-lg shadow p-4">
-            <h3 className="font-semibold text-lg">Próximos agendamentos</h3>
-            <div className="flex items-center justify-between mt-4 p-4 border border-dashed border-gray-300 rounded">
-              <span className="text-gray-500">Sem agendamentos próximos</span>
-              <button className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-                Agendar
-              </button>
+              <h3 className="font-semibold text-lg">Próximos agendamentos</h3>
+              <div className="flex items-center justify-between mt-4 p-4 border border-dashed border-gray-300 rounded">
+                <span className="text-gray-500">Sem agendamentos próximos</span>
+                <button className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                  Agendar
+                </button>
+              </div>
             </div>
           </div>
 
-
-          </div>
+          {/* lembretes */}
           <div>
             <div className="bg-white rounded-lg shadow p-4">
               <h3 className="font-semibold text-lg">Lembretes e notificações</h3>
