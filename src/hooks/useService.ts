@@ -36,6 +36,5 @@ export const useServices = () => {
     [services]
   );
 
-  console.log({ services, filteredServices });
   return { services, filteredServices, handleSearch };
 };

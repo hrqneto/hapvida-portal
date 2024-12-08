@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import MenuLateral from "../Sidebar";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const [menuOpen, setMenuOpen] = React.useState(true);
+const Layout = ({ children }: LayoutProps): JSX.Element => {
+  const [menuOpen, setMenuOpen] = useState(true);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleMenu = (): void => setMenuOpen(!menuOpen);
 
   return (
     <div className="flex h-screen bg-gray-100">

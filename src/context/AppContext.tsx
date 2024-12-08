@@ -16,28 +16,40 @@ interface AppContextProps {
   navigateTo: (path: string) => void;
 }
 
+interface AppProviderProps {
+  children: ReactNode;
+}
+
 const AppContext = createContext<AppContextProps | undefined>(undefined);
 
-export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [menuOpen, setMenuOpen] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
+export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
+  const [menuOpen, setMenuOpen] = useState<boolean>(true);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const banners: Banner[] = [
-    { id: 1, title: "Renovação de receita: o remédio para quem quer economizar tempo.", image: "/banner1.png" },
-    { id: 2, title: "Consulta médica mais fácil, rápida e segura.", image: "/banner2.jpg" },
+    {
+      id: 1,
+      title: "Renovação de receita: o remédio para quem quer economizar tempo.",
+      image: "/banner1.png",
+    },
+    {
+      id: 2,
+      title: "Consulta médica mais fácil, rápida e segura.",
+      image: "/banner2.jpg",
+    },
   ];
 
-  const toggleMenu = () => setMenuOpen((prev) => !prev);
+  const toggleMenu = (): void => setMenuOpen((prev) => !prev);
 
-  const handlePrev = () => {
+  const handlePrev = (): void => {
     setCurrentIndex((prev) => (prev === 0 ? banners.length - 1 : prev - 1));
   };
 
-  const handleNext = () => {
+  const handleNext = (): void => {
     setCurrentIndex((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
   };
 
-  const navigateTo = (path: string) => {
+  const navigateTo = (path: string): void => {
     console.log(`Navegando para: ${path}`);
   };
 

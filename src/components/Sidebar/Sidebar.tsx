@@ -11,17 +11,24 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-
+interface MenuItem {
+  label: string;
+  icon: React.ComponentProps<typeof FontAwesomeIcon>["icon"];
+  path: string;
+}
 interface MenuLateralProps {
   menuOpen: boolean;
   toggleMenu: () => void;
 }
 
-const MenuLateral: React.FC<MenuLateralProps> = ({ menuOpen, toggleMenu }) => {
-  const menuItems = [
+const MenuLateral = ({
+  menuOpen,
+  toggleMenu,
+}: MenuLateralProps): JSX.Element => {
+  const menuItems: MenuItem[] = [
     { label: "Início", icon: faHome, path: "/portal" },
     { label: "Serviços", icon: faConciergeBell, path: "/servicos" },
-    { label: "Agendar", icon: faCalendarAlt, path: "/schedule" },
+    { label: "Agendar", icon: faCalendarAlt, path: "/agendar" },
     { label: "Carteirinha", icon: faIdCard, path: "/carteirinha" },
     { label: "Benefícios", icon: faGift, path: "/beneficios" },
   ];
@@ -32,6 +39,7 @@ const MenuLateral: React.FC<MenuLateralProps> = ({ menuOpen, toggleMenu }) => {
         menuOpen ? "w-64" : "w-16"
       } bg-white shadow-md flex flex-col transition-all duration-300 overflow-hidden`}
     >
+      {/* abrir/fechar menu */}
       <button
         onClick={toggleMenu}
         className={`absolute top-6 ${
@@ -44,6 +52,7 @@ const MenuLateral: React.FC<MenuLateralProps> = ({ menuOpen, toggleMenu }) => {
         />
       </button>
 
+      {/* logo */}
       <div className="flex items-center justify-start pt-6 pb-12 px-4">
         {menuOpen && (
           <svg
@@ -76,6 +85,7 @@ const MenuLateral: React.FC<MenuLateralProps> = ({ menuOpen, toggleMenu }) => {
           </svg>
         )}
       </div>
+
       {/* opcoes do menu */}
       <nav className="flex-1 p-2">
         <ul className="space-y-2">
@@ -88,8 +98,8 @@ const MenuLateral: React.FC<MenuLateralProps> = ({ menuOpen, toggleMenu }) => {
                     menuOpen ? "gap-4 p-3" : "justify-center p-3"
                   } rounded-lg transition-all duration-200 ${
                     isActive
-                      ? "bg-bg-terciary text-primary"
-                      : "text-text-light hover:bg-gray-hover hover:text-primary"
+                      ? "bg-terciary text-primary"
+                      : "text-light  hover:bg-terciary"
                   }`
                 }
               >
@@ -97,7 +107,7 @@ const MenuLateral: React.FC<MenuLateralProps> = ({ menuOpen, toggleMenu }) => {
                   <>
                     <div
                       className={`w-8 h-8 flex items-center justify-center text-lg ${
-                        isActive ? "text-primary" : "text-text-light"
+                        isActive ? "text-primary" : "text-light"
                       }`}
                     >
                       <FontAwesomeIcon icon={item.icon} />
@@ -105,7 +115,7 @@ const MenuLateral: React.FC<MenuLateralProps> = ({ menuOpen, toggleMenu }) => {
                     {menuOpen && (
                       <span
                         className={`text-sm font-medium ${
-                          isActive ? "text-primary" : "text-text-light"
+                          isActive ? "text-primary" : "text-light"
                         }`}
                       >
                         {item.label}
@@ -119,6 +129,7 @@ const MenuLateral: React.FC<MenuLateralProps> = ({ menuOpen, toggleMenu }) => {
         </ul>
       </nav>
 
+      {/* acessibilidade */}
       <div className="p-4">
         <button className="py-2 px-2 bg-primary text-white rounded-2xl hover:bg-primary-hover flex justify-center items-center">
           <FontAwesomeIcon icon={faUniversalAccess} className="text-lg" />

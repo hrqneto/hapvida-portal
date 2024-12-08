@@ -4,13 +4,13 @@ import { AnimatePresence } from "framer-motion";
 import { AppProvider } from "./context/AppContext";
 import Login from "./pages/Login/Login";
 import BeneficiaryPortal from "./pages/BeneficiaryPortal/BeneficiaryPortal";
-import ScheduleTeleconsult from "./pages/ScheduleTeleconsult/ScheduleTeleconsult";
+import ScheduleTeleconsult from "./pages/ScheduleTeleconsult";
 import Layout from "./components/Layout";
 
-const AppRoutes: React.FC = () => {
-  /**
+const AppRoutes = (): JSX.Element => {
+   /**
    * rota protegida que verifica autenticação.
-   * Se o usuário não estiver autenticado, redireciona para a página de login.
+   * se o usuário não estiver autenticado, redireciona para a página de login.
    */
   const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     const isAuthenticated = sessionStorage.getItem("isAuthenticated") === "true";
@@ -36,7 +36,7 @@ const AppRoutes: React.FC = () => {
             />
 
             <Route
-              path="/schedule"
+              path="/agendar"
               element={
                 <Layout>
                   <ScheduleTeleconsult />
